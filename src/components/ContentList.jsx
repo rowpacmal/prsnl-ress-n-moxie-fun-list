@@ -1,9 +1,4 @@
-import {
-  IconCheck,
-  IconClipboard,
-  IconTrash,
-  IconX,
-} from '@tabler/icons-react';
+import { IconCheck, IconClipboard, IconX } from '@tabler/icons-react';
 import AddListItem from './AddListItem';
 import { useContext } from 'react';
 import { ItemContext } from '../context/Context';
@@ -23,35 +18,49 @@ const ContentList = ({ name, list }) => {
           {list.length > 0 ? (
             list.map((item) => {
               return (
-                <li key={item.id}>
-                  <p className={item.isDone ? 'done' : ''}>
-                    {item.title === '' ? 'NO TITLE FOUND' : item.title}
-                  </p>
+                <li
+                  key={item.id}
+                  className="list-item"
+                >
+                  <div
+                    onClick={() => {
+                      completeListItem(name, item.id);
+                    }}
+                    className={'item-text' + (item.isDone ? ' done' : '')}
+                  >
+                    <div className="align-icon">
+                      {item.isDone && (
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            marginRight: '0.15rem',
+                          }}
+                        >
+                          <IconCheck />
+                        </div>
+                      )}{' '}
+                      {item.title === '' ? '-- NO TITLE --' : item.title}
+                    </div>
+                  </div>
 
-                  <div className="btn-wrapper">
-                    <button
-                      onClick={() => {
-                        completeListItem(name, item.id);
-                      }}
-                      className="btn align-icon"
-                    >
-                      {item.isDone ? <IconX /> : <IconCheck />}
-                    </button>
-
+                  <div>
                     <button
                       onClick={() => {
                         removeListItem(name, item.id);
                       }}
-                      className="btn align-icon"
+                      className="remove-btn"
                     >
-                      <IconTrash />
+                      <span className="align-icon">
+                        <IconX />
+                      </span>
                     </button>
                   </div>
                 </li>
               );
             })
           ) : (
-            <li>No Items</li>
+            <li>The list is empty. Please add a new item to this list...</li>
           )}
         </ul>
       </div>

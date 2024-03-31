@@ -1,4 +1,3 @@
-import './assets/styles/App.css';
 import './assets/styles/style.css';
 import { useState, useEffect } from 'react';
 import PantryService from './services/PantryService';
@@ -146,6 +145,7 @@ const App = () => {
           </p>
         </div>
       </header>
+
       <main className="main">
         <ItemContext.Provider
           value={{ createListItem, completeListItem, removeListItem }}
@@ -171,6 +171,7 @@ const App = () => {
           />
         </ItemContext.Provider>
       </main>
+
       <footer className="footer">
         <p>Rowel Malmström &copy; 2024 </p>
       </footer>
