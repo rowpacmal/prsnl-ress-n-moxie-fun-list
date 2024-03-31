@@ -1,7 +1,7 @@
 import {
+  IconCheck,
   IconClipboard,
-  IconSquare,
-  IconSquareCheckFilled,
+  IconTrash,
   IconX,
 } from '@tabler/icons-react';
 import AddListItem from './AddListItem';
@@ -33,16 +33,18 @@ const ContentList = ({ name, list }) => {
                       onClick={() => {
                         completeListItem(name, item.id);
                       }}
+                      className="btn btn-nobg align-icon"
                     >
-                      {item.isDone ? <IconSquareCheckFilled /> : <IconSquare />}
+                      {item.isDone ? <IconX /> : <IconCheck />}
                     </button>
 
                     <button
                       onClick={() => {
                         removeListItem(name, item.id);
                       }}
+                      className="btn btn-nobg align-icon"
                     >
-                      <IconX />
+                      <IconTrash />
                     </button>
                   </div>
                 </li>

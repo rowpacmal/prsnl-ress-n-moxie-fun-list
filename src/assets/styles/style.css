@@ -1,9 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .list-wrapper {
   background-color: #eeeeee88;
   padding: 0.6rem;
@@ -22,8 +16,8 @@
   gap: 0.6rem;
 
   li {
-    max-width: 540px;
-    background-color: #00ffff88;
+    width: 540px;
+    background-color: #eeeeee88;
     border-radius: 0.6rem;
     padding: 0.6rem 1.2rem;
 
@@ -38,6 +32,27 @@
 .btn-wrapper {
   display: flex;
   justify-content: space-between;
+}
+
+.btn {
+  padding: 0.6rem;
+  border: 2px solid transparent;
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.btn:hover {
+  color: red;
+  border-color: red;
+}
+
+.btn-nobg {
+  background-color: transparent;
+}
+
+.align-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .done {
