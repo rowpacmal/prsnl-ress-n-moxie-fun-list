@@ -1,17 +1,21 @@
 import './assets/styles/App.css';
+import './assets/styles/style.css';
 import { useState, useEffect } from 'react';
 import PantryService from './services/PantryService';
 import ContentList from './components/ContentList';
-import AddItemContext from './context/AddItemContext';
+import { ItemContext } from './context/Context';
+import { IconDeviceFloppy } from '@tabler/icons-react';
 
 const App = () => {
-  const [list, setList] = useState({
+  const defaultList = {
     games: [],
     anime: [],
     movies: [],
     tvShows: [],
-  });
-  const [savedList, setSavedList] = useState();
+  };
+
+  const [list, setList] = useState(defaultList);
+  const [savedList, setSavedList] = useState(defaultList);
 
   useEffect(() => {
     const getList = async () => {
@@ -22,7 +26,7 @@ const App = () => {
     getList();
   }, []);
 
-  const createListItem = async (name, title) => {
+  const createListItem = (name, title) => {
     const newList = { ...list };
     const newObj = { id: Date.now(), title: title, isDone: false };
 
@@ -50,6 +54,64 @@ const App = () => {
     setList(newList);
   };
 
+  const completeListItem = (name, id) => {
+    const newList = { ...list };
+    const toggleItem = (item) => {
+      if (item.id === id) item.isDone = !item.isDone;
+    };
+
+    switch (name) {
+      case 'Games':
+        newList.games.forEach((item) => toggleItem(item));
+        break;
+
+      case 'Anime':
+        newList.anime.forEach((item) => toggleItem(item));
+        break;
+
+      case 'Movies':
+        newList.movies.forEach((item) => toggleItem(item));
+        break;
+
+      case 'TV Shows':
+        newList.tvShows.forEach((item) => toggleItem(item));
+        break;
+
+      default:
+        break;
+    }
+
+    setList(newList);
+  };
+
+  const removeListItem = (name, id) => {
+    const newList = { ...list };
+    const removeItem = (item) => item.id !== id;
+
+    switch (name) {
+      case 'Games':
+        newList.games = newList.games.filter((item) => removeItem(item));
+        break;
+
+      case 'Anime':
+        newList.anime = newList.anime.filter((item) => removeItem(item));
+        break;
+
+      case 'Movies':
+        newList.movies = newList.movies.filter((item) => removeItem(item));
+        break;
+
+      case 'TV Shows':
+        newList.tvShows = newList.tvShows.filter((item) => removeItem(item));
+        break;
+
+      default:
+        break;
+    }
+
+    setList(newList);
+  };
+
   const saveList = async () => {
     if (savedList !== list) {
       await PantryService.updateList(list);
@@ -61,31 +123,48 @@ const App = () => {
 
   return (
     <>
-      <AddItemContext.Provider value={createListItem}>
-        <ContentList
-          name="Games"
-          list={list?.games}
-        />
+      <header>
+        <h1>Ress & Moxie</h1>
+        <p>
+          {savedList === list ? (
+            <span>Everything is up to date!</span>
+          ) : (
+            <span>New changes has not been saved yet...</span>
+          )}
+        </p>
+        <button onClick={saveList}>
+          <IconDeviceFloppy />
+          Save All
+        </button>
+      </header>
+      <main>
+        <ItemContext.Provider
+          value={{ createListItem, completeListItem, removeListItem }}
+        >
+          <ContentList
+            name="Games"
+            list={list?.games}
+          />
 
-        <ContentList
-          name="Anime"
-          list={list?.anime}
-        />
+          <ContentList
+            name="Anime"
+            list={list?.anime}
+          />
 
-        <ContentList
-          name="Movies"
-          list={list?.movies}
-        />
+          <ContentList
+            name="Movies"
+            list={list?.movies}
+          />
 
-        <ContentList
-          name="TV Shows"
-          list={list?.tvShows}
-        />
-
-        <div>
-          <button onClick={saveList}>Save All</button>
-        </div>
-      </AddItemContext.Provider>
+          <ContentList
+            name="TV Shows"
+            list={list?.tvShows}
+          />
+        </ItemContext.Provider>
+      </main>
+      <footer>
+        <p>Rowel Malmström &copy; 2024 </p>
+      </footer>
     </>
   );
 };

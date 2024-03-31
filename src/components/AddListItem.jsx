@@ -1,9 +1,10 @@
 import { useContext, useState } from 'react';
-import AddItemContext from '../context/AddItemContext';
+import { ItemContext } from '../context/Context';
+import { IconPlus } from '@tabler/icons-react';
 
 const AddListItem = ({ name }) => {
   const [textInput, setTextInput] = useState('');
-  const createListItem = useContext(AddItemContext);
+  const { createListItem } = useContext(ItemContext);
 
   return (
     <form
@@ -20,7 +21,10 @@ const AddListItem = ({ name }) => {
           setTextInput(e.target.value);
         }}
       />
-      <button>Add</button>
+      <button>
+        <IconPlus />
+        Add
+      </button>
     </form>
   );
 };
