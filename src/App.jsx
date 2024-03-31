@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import PantryService from './services/PantryService';
 import ContentList from './components/ContentList';
 import { ItemContext } from './context/Context';
-import { IconDeviceFloppy } from '@tabler/icons-react';
+import { IconBuildingCarousel, IconDeviceFloppy } from '@tabler/icons-react';
 
 const App = () => {
   const defaultList = {
@@ -123,21 +123,30 @@ const App = () => {
 
   return (
     <>
-      <header>
-        <h1>Ress & Moxie</h1>
-        <p>
-          {savedList === list ? (
-            <span>Everything is up to date!</span>
-          ) : (
-            <span>New changes has not been saved yet...</span>
-          )}
-        </p>
-        <button onClick={saveList}>
-          <IconDeviceFloppy />
-          Save All
-        </button>
+      <header className="header">
+        <h1 className="align-icon">
+          <IconBuildingCarousel size={'3.2rem'} /> Ress & Moxie{' '}
+          <IconBuildingCarousel size={'3.2rem'} />
+        </h1>
+        <div>
+          <button onClick={saveList}>
+            <span className="align-icon">
+              <IconDeviceFloppy />
+              Save All
+            </span>
+          </button>
+          <p>
+            {savedList === list ? (
+              <span className="saved">Everything is up to date!</span>
+            ) : (
+              <span className="unsaved">
+                New changes has not been saved yet...
+              </span>
+            )}
+          </p>
+        </div>
       </header>
-      <main>
+      <main className="main">
         <ItemContext.Provider
           value={{ createListItem, completeListItem, removeListItem }}
         >
@@ -162,7 +171,7 @@ const App = () => {
           />
         </ItemContext.Provider>
       </main>
-      <footer>
+      <footer className="footer">
         <p>Rowel Malmström &copy; 2024 </p>
       </footer>
     </>

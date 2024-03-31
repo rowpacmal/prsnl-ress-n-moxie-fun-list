@@ -1,11 +1,36 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  h1 {
+    text-transform: uppercase;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header,
+.footer {
+  margin: 2rem 0;
+}
+
+.section:not(:first-child) {
+  border-top: 5px dashed #eee;
+  padding-top: 1rem;
+}
+
 .list-wrapper {
-  background-color: #eeeeee88;
+  background-color: #11111188;
   padding: 0.6rem;
   border-radius: 0.6rem;
 }
 
 .list {
-  list-style: none;
   height: 400px;
   width: 600px;
   overflow-y: scroll;
@@ -17,7 +42,7 @@
 
   li {
     width: 540px;
-    background-color: #eeeeee88;
+    background-color: #11111188;
     border-radius: 0.6rem;
     padding: 0.6rem 1.2rem;
 
@@ -29,6 +54,21 @@
   }
 }
 
+.form {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+
+  input {
+    width: 100%;
+    padding: 0 1rem;
+    background-color: #eee;
+    border: 0;
+    color: #111;
+    border-radius: 0.6rem;
+  }
+}
+
 .btn-wrapper {
   display: flex;
   justify-content: space-between;
@@ -36,26 +76,29 @@
 
 .btn {
   padding: 0.6rem;
-  border: 2px solid transparent;
-  transition: border-color 0.25s, color 0.25s;
 }
 
 .btn:hover {
-  color: red;
-  border-color: red;
-}
-
-.btn-nobg {
-  background-color: transparent;
+  color: #dc143c;
+  border-color: #dc143c;
 }
 
 .align-icon {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.3rem;
 }
 
 .done {
   text-decoration: line-through;
   opacity: 0.5;
+}
+
+.saved {
+  color: #00ffff;
+}
+
+.unsaved {
+  color: #dc143c;
 }

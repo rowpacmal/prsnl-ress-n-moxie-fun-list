@@ -12,10 +12,10 @@ const ContentList = ({ name, list }) => {
   const { completeListItem, removeListItem } = useContext(ItemContext);
 
   return (
-    <section>
-      <h2>
-        <IconClipboard />
-        {name}
+    <section className="section">
+      <h2 className="align-icon">
+        <IconClipboard size={'3.2rem'} />
+        {name} List
       </h2>
       <AddListItem name={name} />
       <div className="list-wrapper">
@@ -33,7 +33,7 @@ const ContentList = ({ name, list }) => {
                       onClick={() => {
                         completeListItem(name, item.id);
                       }}
-                      className="btn btn-nobg align-icon"
+                      className="btn align-icon"
                     >
                       {item.isDone ? <IconX /> : <IconCheck />}
                     </button>
@@ -42,7 +42,7 @@ const ContentList = ({ name, list }) => {
                       onClick={() => {
                         removeListItem(name, item.id);
                       }}
-                      className="btn btn-nobg align-icon"
+                      className="btn align-icon"
                     >
                       <IconTrash />
                     </button>

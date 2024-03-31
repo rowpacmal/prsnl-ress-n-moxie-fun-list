@@ -13,18 +13,24 @@ const AddListItem = ({ name }) => {
         createListItem(name, textInput);
         setTextInput('');
       }}
+      className="form"
     >
       <input
         type="text"
+        placeholder="Add new item..."
         value={textInput}
         onChange={(e) => {
           setTextInput(e.target.value);
         }}
       />
-      <button>
-        <IconPlus />
-        Add
-      </button>
+      <div>
+        <button>
+          <span className="align-icon">
+            <IconPlus />
+            Add
+          </span>
+        </button>
+      </div>
     </form>
   );
 };
